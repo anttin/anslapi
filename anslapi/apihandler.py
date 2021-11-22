@@ -56,13 +56,14 @@ class APIHandler(object):
 
   def handle(self, event):
     if 'body' in event:
-      try:
-        json.loads(event['body'])
-      except JSONDecodeError as e:
-        return self.build_response(400, { "message": "Invalid JSON in request body" })
-      except Exception as e: # pylint: disable=broad-except
-        print("Exception: " + str(e))
-        return self.build_response(400, { "message": "Unknown error with request" })
+      if event['httpMethod'] in ['PUT', 'POST', 'PATCH']:
+        try:
+          json.loads(event['body'])
+        except JSONDecodeError as e:
+          return self.build_response(400, { "message": "Invalid JSON in request body" })
+        except Exception as e: # pylint: disable=broad-except
+          print("Exception: " + str(e))
+          return self.build_response(400, { "message": "Unknown error with request" })
 
     else:
       # If you get this error, check that you are running API Gateway in Lambda Proxy mode
