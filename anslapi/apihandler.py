@@ -61,7 +61,7 @@ class APIHandler(object):
       except JSONDecodeError as e:
         return self.build_response(400, { "message": "Invalid JSON in request body" })
       except Exception as e: # pylint: disable=broad-except
-        print("Exception: " + e)
+        print("Exception: " + str(e))
         return self.build_response(400, { "message": "Unknown error with request" })
 
     else:
