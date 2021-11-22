@@ -69,10 +69,10 @@ class APIHandler(object):
       return self.build_response(400, { "message": "Invalid request, check config" })
 
     if event['httpMethod'] not in self.methods:
-      return (405, { "message": "Method not allowed" }, None)
+      return self.build_response(405, { "message": "Method not allowed" }, None)
 
     if event['resource'] not in self.methods[event['httpMethod']]:
-      return (404, { "message": "Not found" }, None)
+      return self.build_response(404, { "message": "Not found" }, None)
 
     func = self.methods[event['httpMethod']][event['resource']]
     allowed_methods = self._get_allowed_methods(event['resource'])

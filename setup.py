@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
   name="anslapi",
-  version="1.0.0",
+  version="1.0.1",
   author="anttin",
   author_email="muut.py@antion.fi",
   description="Module for creating a simple API with AWS Lambda and API Gateway",
